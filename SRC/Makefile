@@ -1,21 +1,19 @@
-CGtest:main.o cgmethod.o
-	gfortran -o CGtest main.o cgmethod.o -lblas
+.PHONY: clean
 
-main.o:main.c
+CGtest.exe: main.o cgmethod.o
+	gfortran -o CGtest.exe main.o cgmethod.o -lblas
+
+main.o: main.c
 	gcc -c main.c
 
-cgmethod.o:cgmethod.c
-	gcc -c cgmethod.c 
+cgmethod.o: cgmethod.c
+	gcc -c cgmethod.c
 
-.PHONY:tryssymv
-
-tryssymv:tryssymv.o
+tryssymv: tryssymv.o
 	gfortran -o tryssymv tryssymv.o -lblas
 
 tryssymv.o:tryssymv.c
-	gcc -c tryssymv.c	
-
-.PHONY:clean
+	gcc -c tryssymv.c
 
 clean:
-	rm -f tryssymv tryssymv.o main.o cgmethod.o CGtest
+	rm -f tryssymv tryssymv.o main.o cgmethod.o CGtest.exe
